@@ -5,20 +5,269 @@ from nltk.corpus import wordnet as wn
 import itertools
 
 class Pair:
-    sim = 0
-    word = ""
-    word2 = ""
+    #sim = 0
+    #word = ""
+    #word2 = ""
     
     def __init__(self, sim, word, word2):
         self.sim = sim
         self.word = word
         self.word2 = word2
+        self.hyper = []
+        self.hypo = []
+        self.root = []
+        self.common = []
+        self.memholo = []
+        self.hyper2 = []
+        self.hypo2 = []
+        self.root2 = []
+        self.common2 = []
+        self.memholo2 = []
+        self.megac = []
+        self.lemsc = []
+        self.totalc = []
+        self.cat = []
+        self.cat2 = []
+        self.inhypo = []
+        self.inhyper = []
+        self.inhypo2 = []
+        self.inhyper2 = []
+        self.memmero = []
+        self.submero = []
+        self.partmero = []
+        self.topic = []
+        self.region = []
+        self.usage = []
+        self.cause = []
+        self.sims = []
+        self.subholo = []
+        self.partholo = []
+        self.memmero2 = []
+        self.submero2 = []
+        self.partmero2 = []
+        self.topic2 = []
+        self.region2 = []
+        self.usage2 = []
+        self.cause2 = []
+        self.sims2 = []
+        self.partholo2 = []
+        self.subholo2 = []
+        self.lems = []
+        self.lems2 = []
         
     def __repr__(self):
         return '{}: {} {} {}'.format(self.__class__.__name__,
                                   self.word,
                                   self.word2,
                                   self.sim)
+    def getSets(self):
+        for synset in wn.synsets(self.word):
+            self.cat.append(synset.lexname())
+            try:
+                #print("TEST: "+self.word)
+                #print(synset.hypernyms())
+                res = synset.hypernyms()[0].lemma_names()
+                self.hyper += res
+            except:
+                pass
+            try:
+                res = synset.hyponyms()[0].lemma_names()
+                self.hypo += res
+            except:
+                pass
+            try:
+                res = synset.root_hypernyms()[0].lemma_names()
+                self.root += res
+            except:
+                pass
+            try:
+                res = synset.lowest_common_hypernyms()[0].lemma_names()
+                self.common += res
+            except:
+                pass
+            try:
+                res = synset.member_holonyms()[0].lemma_names()
+                self.memholo += res
+            except:
+                pass
+            try:
+                res = synset.instance_hypernyms()[0].lemma_names()
+                self.inhyper += res
+            except:
+                pass
+            try:
+                res = synset.instance_hyponyms()[0].lemma_names()
+                self.inhypo += res
+            except:
+                pass
+            try:
+                res = synset.substance_holonyms()[0].lemma_names()
+                self.subholo += res
+            except:
+                pass
+            try:
+                res = synset.part_holonyms()[0].lemma_names()
+                self.partholo += res
+            except:
+                pass
+            try:
+                res = synset.member_meronyms()[0].lemma_names()
+                self.memmero += res
+            except:
+                pass
+            try:
+                res = synset.substance_meronyms()[0].lemma_names()
+                self.submero += res
+            except:
+                pass
+            try:
+                res = synset.part_meronyms()[0].lemma_names()
+                self.partmero += res
+            except:
+                pass
+            try:
+                res = synset.topic_domains()[0].lemma_names()
+                self.topic += res
+            except:
+                pass
+            try:
+                res = synset.region_domains()[0].lemma_names()
+                self.region += res
+            except:
+                pass
+            try:
+                res = synset.usage_domains()[0].lemma_names()
+                self.usage += res
+            except:
+                pass
+            try:
+                res = synset.causes()[0].lemma_names()
+                self.cause += res
+            except:
+                pass
+            try:
+                res = synset.similar_tos()[0].lemma_names()
+                self.sims += res
+            except:
+                pass
+            try:
+                res = synset.lemma_names()
+                self.lems += res
+            except:
+                pass
+        for synset in wn.synsets(self.word2):
+            self.cat2.append(synset.lexname())
+            try:
+                #print("TEST: "+self.word2)
+                #print(synset.hypernyms())
+                res = synset.hypernyms()[0].lemma_names()
+                self.hyper2 += res
+            except:
+                pass
+            try:
+                res = synset.hyponyms()[0].lemma_names()
+                self.hypo2 += res
+            except:
+                pass
+            try:
+                res = synset.root_hypernyms()[0].lemma_names()
+                self.root2 += res
+            except:
+                pass
+            try:
+                res = synset.lowest_common_hypernyms()[0].lemma_names()
+                self.common2 += res
+            except:
+                pass
+            try:
+                res = synset.member_holonyms()[0].lemma_names()
+                self.memholo2 += res
+            except:
+                pass
+            try:
+                res = synset.instance_hypernyms()[0].lemma_names()
+                self.inhyper2 += res
+            except:
+                pass
+            try:
+                res = synset.instance_hyponyms()[0].lemma_names()
+                self.inhypo2 += res
+            except:
+                pass
+            try:
+                res = synset.substance_holonyms()[0].lemma_names()
+                self.subholo2 += res
+            except:
+                pass
+            try:
+                res = synset.part_holonyms()[0].lemma_names()
+                self.partholo2 += res
+            except:
+                pass
+            try:
+                res = synset.member_meronyms()[0].lemma_names()
+                self.memmero2 += res
+            except:
+                pass
+            try:
+                res = synset.substance_meronyms()[0].lemma_names()
+                self.submero2 += res
+            except:
+                pass
+            try:
+                res = synset.part_meronyms()[0].lemma_names()
+                self.partmero2 += res
+            except:
+                pass
+            try:
+                res = synset.topic_domains()[0].lemma_names()
+                self.topic2 += res
+            except:
+                pass
+            try:
+                res = synset.region_domains()[0].lemma_names()
+                self.region2 += res
+            except:
+                pass
+            try:
+                res = synset.usage_domains()[0].lemma_names()
+                self.usage2 += res
+            except:
+                pass
+            try:
+                res = synset.causes()[0].lemma_names()
+                self.cause2 += res
+            except:
+                pass
+            try:
+                res = synset.similar_tos()[0].lemma_names()
+                self.sims2 += res
+            except:
+                pass
+            try:
+                res = synset.lemma_names()
+                self.lems2 += res
+            except:
+                pass
+        """self.hyperc = list(set(self.hyper) & set(self.hyper2))
+        self.hypoc = list(set(self.hypo) & set(self.hypo2))
+        self.memberc = list(set(self.member) & set(self.member2))
+        self.commonc = list(set(self.common) & set(self.common2))
+        self.rootc = list(set(self.root) & set(self.root2))"""
+        self.megac = list(set(self.root+self.hyper+self.hypo+self.memholo+\
+                              self.common+self.cat+self.inhypo+self.inhyper+\
+                              self.subholo+self.partholo+self.memmero+self.submero+\
+                              self.partmero+self.topic+self.region+self.usage+\
+                              self.cause+self.sims)\
+                          & set(self.root2+self.hyper2+self.hypo2+self.memholo2+\
+                                self.common2+self.cat2+self.inhypo2+self.inhyper2+\
+                                self.subholo2+self.partholo2+self.memmero2+self.submero2+\
+                                self.partmero2+self.topic2+self.region2+self.usage2+\
+                                self.cause2+self.sims2))
+        self.lemsc = list(set(self.lems) & set(self.lems2))
+        self.totalc = list(set(self.megac + self.lemsc))
+        
+        
 
 def getKey(pair):
     return pair.sim
@@ -198,52 +447,79 @@ def run():
             best = sorted(best, key=getKey)
     print(best)
             
-            
+    pair1 = best[4]
+    pair2 = best[3]
+    pair3 = best[2]
+    pair1.getSets()
+    pair2.getSets()
+    pair3.getSets()
+    print (pair1.lems)
+    
+    def pairPrint(pair):
+        print("Word: "+pair.word+" + Word2: "+pair.word2+" COMMON RELATED WORDS\n")
+        #print(pair.hyperc)
+        #print(pair.hypoc)
+        #print(pair.rootc)
+        #print(pair.commonc)
+        #print(pair.memberc)
+        #print(pair.catc)
+        print(pair.megac)
+        print(pair.lemsc)
+        print(pair.totalc)
+    
+    pairPrint(pair1)
+    pairPrint(pair2)
+    pairPrint(pair3)
         
-    """for word in redwords:
-        print("BEGINNING WORD === "+word+" ===\n\n")
+    for word in redwords:
+        #print("\nBEGINNING WORD === "+word+" ===\n")
         for synset in wn.synsets(word):
-            print(synset)
-            for lemma in synset.lemmas():
-                print(lemma.name())
+           #print(synset)
+            #for lemma in synset.lemmas():
+                #print(lemma.name())
             try:
                 res = synset.hypernyms()[0].lemma_names()
-                print("HYPERNYMS")
-                print(res)
+                #print("HYPERNYMS")
+                #print(res)
             except:
-                print("NO HYPERNYMS")
+                #print("NO HYPERNYMS")
+                pass
             try:
                 res = synset.hyponyms()[0].lemma_names()
-                print("HYPONYMS")
-                print(res)
+                #print("HYPONYMS")
+                #print(res)
             except:
-                print("NO HYPONYMS")
+                #print("NO HYPONYMS")
+                pass
             try:
                 res = synset.root_hypernyms()[0].lemma_names()
-                print("ROOT HYPERNYMS")
-                print(res)
+                #print("ROOT HYPERNYMS")
+                #print(res)
             except:
-                print("NO ROOT HYPERNYMS")
+                #print("NO ROOT HYPERNYMS")
+                pass
             try:
                 res = synset.lowest_common_hypernyms()[0].lemma_names()
-                print("LOWEST COMMON HYPERNYMS")
-                print(res)
+                #print("LOWEST COMMON HYPERNYMS")
+                #print(res)
             except:
-                print("NO LOWEST COMMON HYPERNYMS")
+                #print("NO LOWEST COMMON HYPERNYMS")
+                pass
             try:
                 res = synset.member_holonyms()[0].lemma_names()
-                print("MEMBER HOLONYMS")
-                print(res)
+                #print("MEMBER HOLONYMS")
+                #print(res)
             except:
-                print("NO HOLONYMS")
-    print("assassin hypernyms")
+                #print("NO HOLONYMS")
+                pass
+    """print("assassin hypernyms")
     print(wn.synsets(assassin)[0].hypernyms()[0].lemma_names())
     print("assassin member holonyms")
     print(wn.synsets(assassin)[0].member_holonyms()[0].lemma_names())
     print("assassin meronyms")
     print(wn.synsets(assassin)[0].meronyms()[0].lemma_names())
     print("assassin troponyms")
-    print(wn.synsets(assassin)[0].troponyms()[0].lemma_names())"""
+    print(wn.synsets(assassin)[0].troponyms()[0].lemma_names())
 
     dead=False
     while (len(redwords)>0 and len(bluewords)>0 and dead!=True):
@@ -255,6 +531,7 @@ def run():
         win(1)
     else:
         win(0)
+    """
     
 run()
 
