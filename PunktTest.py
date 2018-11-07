@@ -20,8 +20,6 @@ tokenizer = nltk.tokenize.punkt.PunktSentenceTokenizer()
 wordlist = []
 pages = ""
     
-
-
 with open('words.json','r') as f:
     datastore=json.load(f)
 
